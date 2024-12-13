@@ -5,22 +5,10 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import Image from "next/image";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import dynamic from "next/dynamic";
 
 export default function Home() {
-  const ClientOnlyComponent = dynamic(() => import('path/to/Component'), { ssr: false });
   const [countdown, setCountdown] = useState("");
   const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    // Menandakan bahwa kode ini dijalankan di client-side
-    setIsClient(true);
-  }, []);
-
-  if (!isClient) {
-    // Halaman ini tidak akan menampilkan bagian yang memerlukan `window` saat di server-side
-    return null; 
-  }
 
   useEffect(() => {
     const targetDate = new Date("2025-01-08T00:00:00").getTime();

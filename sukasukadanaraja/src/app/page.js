@@ -49,7 +49,7 @@ export default function Home() {
 
   // Leaflet Map Initialization
   useEffect(() => {
-    const map = L.map("map").setView([-7.447615887782863, 109.53521562369454], 14); // Set center to Desa Danaraja
+    const map = L.map("map").setView([-7.447615887782863, 109.53521562369454], 16); // Set center to Desa Danaraja
 
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
@@ -142,6 +142,22 @@ export default function Home() {
         <h1 className="text-4xl font-bold text-white mb-4">KKN DESA DANARAJA 2025</h1>
         <div className="text-2xl text-white mb-4">{countdown}</div>
         <p className="text-lg text-white">Tanggal Mulai: 8 Januari 2025</p>
+      </div>
+
+      <div className="flex flex-col items-center justify-start p-8 text-white">
+        <h2 className="text-3xl font-bold mb-4">Logo Release</h2>
+        <div className="w-full flex justify-center">
+          <Image
+            src="/kkn.png" 
+            alt="Lokasi Desa Danaraja"
+            width={600}
+            height={400}
+            className="rounded-full" 
+          />
+        </div>
+        <p className="text-lg mt-4 text-center">
+          Gambar di atas merupakan logo resmi KKN Unsoed Desa Danaraja 2025.
+        </p>
       </div>
 
       <div className="flex flex-col items-center justify-start p-8 text-white">

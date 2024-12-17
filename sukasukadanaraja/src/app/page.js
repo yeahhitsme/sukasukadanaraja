@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import Image from "next/image";
-import L from "leaflet";
+import L, { tooltip } from "leaflet";
 import "leaflet/dist/leaflet.css";
 
 export default function Home() {
@@ -83,7 +83,7 @@ export default function Home() {
     // Add marker for Desa Danaraja
     L.marker([-7.447615887782863, 109.53521562369454], { icon: blueIcon })
       .addTo(map)
-      .bindPopup("Desa Danaraja");
+      .bindTooltip('Balai Desa Danareja', { permanent: true, className: 'custom-tooltip', offset: [0, -10] });
 
     return () => {
       map.remove(); // Cleanup map on component unmount
@@ -246,30 +246,30 @@ export default function Home() {
       </div>
 
       {/* Kolom 5 */}
-      <div>
-        <h3 className="font-bold mb-4">Kontak Kami</h3>
-        <ul>
-          <li className="flex items-center gap-2">
-            <i className="fab fa-instagram text-pink-500"></i>
-            <a href="https://instagram.com/kkndanaraja2025" target="_blank" className="hover:underline">
-              @kkndanaraja2025
-            </a>
-          </li>
-          <li className="flex items-center gap-2">
-            <i className="fas fa-phone-alt text-green-500"></i>
-            <a href="https://wa.me/6285742934636" target="blank" className="hove:underline">
-              +62 857-4293-4636
-            </a>
-          </li>
-          <li className="flex items-center gap-2">
-            <i className="fas fa-envelope text-red-500"></i>
-            <a href="mailto:abdulfahmi598@gmail.com" className="hover:underline">
-              abdulfahmi598
-            </a>
-          </li>
-        </ul>
+        <div>
+          <h3 className="font-bold mb-4">Kontak Kami</h3>
+          <ul>
+            <li className="flex items-center gap-2">
+              <i className="fab fa-instagram text-pink-500"></i>
+              <a href="https://instagram.com/kkndanaraja2025" target="_blank" className="hover:underline">
+                @kkndanaraja2025
+              </a>
+            </li>
+            <li className="flex items-center gap-2">
+              <i className="fas fa-phone-alt text-green-500"></i>
+              <a href="https://wa.me/6285742934636" target="blank" className="hove:underline">
+                +62 857-4293-4636
+              </a>
+            </li>
+            <li className="flex items-center gap-2">
+              <i className="fas fa-envelope text-red-500"></i>
+              <a href="mailto:abdulfahmi598@gmail.com" className="hover:underline">
+                abdulfahmi598
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
 
           <div className="border-t border-gray-700 mt-8 pt-4 text-center">
             <p>© 2024 Petir Bercerita. All rights reserved.</p>

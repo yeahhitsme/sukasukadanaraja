@@ -6,6 +6,7 @@ import Image from "next/image";
 import L, { tooltip } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 
 export default function Home() {
   const [countdown, setCountdown] = useState("");

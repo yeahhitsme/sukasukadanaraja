@@ -9,16 +9,17 @@ import "leaflet/dist/leaflet.css";
 export default function Home() {
   const [countdown, setCountdown] = useState("");
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
-    const targetDate = new Date("2025-01-08T00:00:00").getTime();
+    const targetDate = new Date("2025-02-11T23:59:59").getTime();
     const interval = setInterval(() => {
       const now = new Date().getTime();
       const distance = targetDate - now;
 
       if (distance < 0) {
         clearInterval(interval);
-        setCountdown("Kegiatan telah dimulai!");
+        setCountdown("Kegiatan telag berakhir!");
       } else {
         const days = Math.floor(distance / (1000 * 60 * 60 * 24));
         const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -92,56 +93,94 @@ export default function Home() {
 
   return (
     <div className="flex flex-col items-center justify-start min-h-screen bg-gradient-to-b from-black to-green-700 p-8">
-      <header
-        className={`flex items-center justify-between px-8 py-4 bg-transparent fixed top-0 w-full z-10 transition-all duration-300 ${isScrolled ? "backdrop-blur-md bg-opacity-50" : ""}`}
+      <header className={`flex items-center justify-between px-4 md:px-8 py-4 bg-transparent fixed top-0 w-full z-10 transition-all duration-300 ${
+      isScrolled ? "backdrop-blur-md bg-opacity-50" : ""}`}>
+      <div className="flex items-center gap-4">
+        <Image src="/kkn.png" alt="Logo KKN" width={40} height={40} priority className="rounded-full" />
+        <h2 className="text-white">Suka-suka Danaraja</h2>
+      </div>
+
+      {/* Mobile menu button */}
+      <button 
+        className="md:hidden text-white"
+        onClick={() => setIsMenuOpen(!isMenuOpen)}
       >
-        <div className="flex items-center gap-4">
-          <Image
-            src="/kkn.png"
-            alt="Logo KKN"
-            width={40}
-            height={40}
-            priority
-            className="rounded-full"
-          />
-          <h2 className="text-white">Suka-suka Danaraja</h2>
-        </div>
-        <nav className="flex space-x-8">
-          <div className="group relative">
-            <button className="text-white px-4 py-2">Profil</button>
-            <div className="absolute hidden bg-gradient-to-b from-black to-green-700 text-white text-sm shadow-md border-2 border-white rounded-md top-10 left-0 w-48 group-hover:block">
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          {isMenuOpen ? (
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+          ) : (
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+          )}
+        </svg>
+      </button>
+
+      {/* Mobile menu */}
+      <div className={`${isMenuOpen ? 'block' : 'hidden'} absolute top-full left-0 w-full bg-black bg-opacity-90 md:hidden`}>
+        <nav className="flex flex-col p-4">
+          <div className="relative py-2">
+            <button className="text-white w-full text-left px-4 py-2" 
+                    onClick={(e) => e.currentTarget.nextElementSibling.classList.toggle('hidden')}>
+              Profil
+            </button>
+            <div className="hidden bg-gray-800 rounded-md">
               <ul className="p-2">
-                <li><a href="#" className="block px-4 py-2">Struktur KKN</a></li>
-                <li><a href="#" className="block px-4 py-2">Proker</a></li>
+                <li><a href="#" className="block px-4 py-2 text-white">Struktur KKN</a></li>
+                <li><a href="#" className="block px-4 py-2 text-white">Proker</a></li>
               </ul>
             </div>
           </div>
 
-          <div className="group relative">
-            <button className="text-white px-4 py-2">Desa</button>
-            <div className="absolute hidden bg-gradient-to-b from-black to-green-700 text-white text-sm shadow-md border-2 border-white rounded-md top-10 left-0 w-48 group-hover:block">
+          <div className="relative py-2">
+            <button className="text-white w-full text-left px-4 py-2"
+                    onClick={(e) => e.currentTarget.nextElementSibling.classList.toggle('hidden')}>
+              Desa
+            </button>
+            <div className="hidden bg-gray-800 rounded-md">
               <ul className="p-2">
-                <li><a href="#" className="block px-4 py-2">Profil Desa</a></li>
-                <li><a href="#" className="block px-4 py-2">Lokasi Desa</a></li>
-                <li><a href="#" className="block px-4 py-2">UMKM</a></li>
+                <li><a href="#" className="block px-4 py-2 text-white">Profil Desa</a></li>
+                <li><a href="#" className="block px-4 py-2 text-white">Lokasi Desa</a></li>
+                <li><a href="#" className="block px-4 py-2 text-white">UMKM</a></li>
               </ul>
             </div>
           </div>
 
-          <div className="relative">
-            <button className="text-white px-4 py-2">Dokumentasi</button>
-          </div>
-
-          <div className="relative">
-            <button className="text-white px-4 py-2">Contact</button>
-          </div>
+          <a href="#" className="text-white px-4 py-2">Dokumentasi</a>
+          <a href="#" className="text-white px-4 py-2">Contact</a>
         </nav>
-      </header>
+      </div>
+
+      {/* Desktop menu */}
+      <nav className="hidden md:flex space-x-8">
+        <div className="group relative">
+          <button className="text-white px-4 py-2">Profil</button>
+          <div className="absolute hidden bg-gradient-to-b from-black to-green-700 text-white text-sm shadow-md border-2 border-white rounded-md top-10 left-0 w-48 group-hover:block">
+            <ul className="p-2">
+              <li><a href="#" className="block px-4 py-2">Struktur KKN</a></li>
+              <li><a href="#" className="block px-4 py-2">Proker</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="group relative">
+          <button className="text-white px-4 py-2">Desa</button>
+          <div className="absolute hidden bg-gradient-to-b from-black to-green-700 text-white text-sm shadow-md border-2 border-white rounded-md top-10 left-0 w-48 group-hover:block">
+            <ul className="p-2">
+              <li><a href="#" className="block px-4 py-2">Profil Desa</a></li>
+              <li><a href="#" className="block px-4 py-2">Lokasi Desa</a></li>
+              <li><a href="#" className="block px-4 py-2">UMKM</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <button className="text-white px-4 py-2">Dokumentasi</button>
+        <button className="text-white px-4 py-2">Contact</button>
+      </nav>
+    </header>
 
       <div className="flex flex-col items-center justify-center min-h-screen pt-20 p-8">
         <h1 className="text-4xl font-bold text-white mb-4">KKN DESA DANARAJA 2025</h1>
         <div className="text-2xl text-white mb-4">{countdown}</div>
-        <p className="text-lg text-white">Tanggal Mulai: 8 Januari 2025</p>
+        <p className="text-lg text-white">Tanggal Berakhir: 11 Februari 2025</p>
       </div>
 
       <div className="flex flex-col items-center justify-start p-8 text-white">

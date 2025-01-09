@@ -34,6 +34,7 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
+    if (typeof window !== "undefined") {
     const handleScroll = () => {
       if (window.scrollY > 10) {
         setIsScrolled(true);
@@ -47,10 +48,12 @@ export default function Home() {
     return () => {
         window.removeEventListener("scroll", handleScroll);
     };
+  }
   }, []);
 
   // Leaflet Map Initialization
   useEffect(() => {
+    if (typeof window !== "undefined") {
     const map = L.map("map").setView([-7.447615887782863, 109.53521562369454], 16); // Set center to Desa Danaraja
 
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -90,6 +93,7 @@ export default function Home() {
     return () => {
       map.remove(); // Cleanup map on component unmount
     };
+  }
   }, []);
 
   return (

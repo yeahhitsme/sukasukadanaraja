@@ -5,6 +5,7 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import Image from "next/image";
 import L, { tooltip } from "leaflet";
 import "leaflet/dist/leaflet.css";
+import Link from "next/link";
 
 export default function Home() {
   const [countdown, setCountdown] = useState("");
@@ -41,10 +42,10 @@ export default function Home() {
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
+      window.addEventListener("scroll", handleScroll);
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+        window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
@@ -311,7 +312,7 @@ export default function Home() {
       </div>
 
           <div className="border-t border-gray-700 mt-8 pt-4 text-center">
-            <p>© 2024 Petir Bercerita. All rights reserved.</p>
+            <p>© 2025 Suka-Suka Danaraja. All rights reserved.</p>
           </div>
         </div>
       </div>

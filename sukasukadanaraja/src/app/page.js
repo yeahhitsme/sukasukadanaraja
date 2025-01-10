@@ -6,7 +6,13 @@ import Image from "next/image";
 import L, { tooltip } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import Link from "next/link";
-import dynamic from "next/dynamic";
+import dynamic from 'next/dynamic';
+
+// Dynamic import with no SSR
+const Map = dynamic(() => import('./Map'), { 
+  ssr: false,
+  loading: () => <div className="w-full h-96 bg-gray-200 rounded-md animate-pulse" />
+});
 
 export default function Home() {
   const [countdown, setCountdown] = useState("");
@@ -52,50 +58,7 @@ export default function Home() {
   }
   }, []);
 
-  // Leaflet Map Initialization
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-    const map = L.map("map").setView([-7.447615887782863, 109.53521562369454], 16); // Set center to Desa Danaraja
-
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    }).addTo(map);
-
-    // Define the polygon coordinates surrounding Desa Danaraja
-    const polygonCoords = [
-      [-7.450, 109.530],
-      [-7.450, 109.540],
-      [-7.445, 109.540],
-      [-7.445, 109.530],
-      [-7.450, 109.530],
-    ];
-
-    // Add polygon boundary
-    const polygon = L.polygon(polygonCoords, {
-      color: "blue",
-      weight: 2,
-      fillColor: "lightblue",
-      fillOpacity: 0.4,
-    }).addTo(map);
-
-    // Custom Bootstrap Blue Marker
-    const blueIcon = L.divIcon({
-      className: "custom-icon",
-      html: '<i class="fas fa-map-marker-alt text-primary" style="font-size: 2rem; color: blue;"></i>',
-      iconSize: [24, 24],
-      iconAnchor: [12, 24], // Center the icon
-    });
-
-    // Add marker for Desa Danaraja
-    L.marker([-7.447615887782863, 109.53521562369454], { icon: blueIcon })
-      .addTo(map)
-      .bindTooltip('Balai Desa Danareja', { permanent: true, className: 'custom-tooltip', offset: [0, -10] });
-
-    return () => {
-      map.remove(); // Cleanup map on component unmount
-    };
-  }
-  }, []);
+  
 
   return (
     <div className="flex flex-col items-center justify-start min-h-screen bg-gradient-to-b from-black to-green-700 p-8">
@@ -244,7 +207,7 @@ export default function Home() {
 
       <div className="flex flex-col items-center justify-start p-8 text-white w-full">
         <h2 className="text-3xl font-bold mb-4">Lokasi KKN</h2>
-        <div id="map" className="w-full h-96 rounded-md shadow-md"></div>
+        <Map />
       </div>
 
       <div className="text-white py-8">

@@ -207,7 +207,7 @@ export default function Home() {
 
       <div className="flex flex-col items-center justify-start p-8 text-white w-full">
         <h2 className="text-3xl font-bold mb-4">Lokasi KKN</h2>
-        <Map />
+        <div id="Map" className="w-full h-96 rounded-md shadow-md"></div>
       </div>
 
       <div className="text-white py-8">
